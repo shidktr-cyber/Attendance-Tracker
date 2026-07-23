@@ -358,22 +358,21 @@ function processAttendance(currentDate, qrData) {
         return;
     }
     
-    // 現在の時分を取得して数値化（例: 10:45 -> 1045）
+    // 現在の時分を取得して分単位に変換（例: 10:45 -> 10 * 60 + 45 = 645）
     const h = currentDate.getHours();
     const m = currentDate.getMinutes();
-    const currentTimeNum = h * 100 + m;
+    const currentMinutes = h * 60 + m;
     
     // 現在時刻がどの時限に該当するか判定
     let targetPeriod = null;
     for (const period of PERIODS) {
         const startParts = period.start.split(':').map(Number);
         const endParts = period.end.split(':').map(Number);
-        const startTimeNum = startParts[0] * 100 + startParts[1];
-        const endTimeNum = endParts[0] * 100 + endParts[1];
+        const startMinutes = startParts[0] * 60 + startParts[1];
+        const endMinutes = endParts[0] * 60 + endParts[1];
         
-        // 授業開始10分前から授業終了までを打刻可能時間とする（要件に応じて調整可）
-        // ここでは単純に時間割の枠内に収まっているかで判定
-        if (currentTimeNum >= (startTimeNum - 10) && currentTimeNum <= endTimeNum) {
+        // 授業開始10分前から授業終了までを打刻可能時間とする
+        if (currentMinutes >= (startMinutes - 10) && currentMinutes <= endMinutes) {
             targetPeriod = period.id;
             break;
         }
