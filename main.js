@@ -418,15 +418,21 @@ function processAttendance(currentDate, qrData) {
             
             statusMsg.textContent = `打刻成功：${targetPeriod}限`;
             statusMsg.className = 'status-message success';
-            
-            // スキャンを一旦停止する（オプション）
-            // stopScanner(); 
         }
     } else {
         // 時間外
         showToast('現在は授業時間外です', true);
         statusMsg.textContent = '現在は打刻可能な授業時間外です。';
         statusMsg.className = 'status-message';
+    }
+
+    // QRデータがURLの場合は該当ページへ飛ぶ処理
+    if (qrData && (qrData.startsWith('http://') || qrData.startsWith('https://'))) {
+        showToast('読み取ったページへ移動します...');
+        // 少し待ってから画面遷移する（打刻成功の通知を見せるため）
+        setTimeout(() => {
+            window.location.href = qrData;
+        }, 1200);
     }
 }
 
