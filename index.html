@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Tracker - 打刻履歴</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1>Attendance</h1>
+                <p>時間割 連動打刻システム</p>
+            </div>
+            <div id="current-time-display" class="time-display">--:--</div>
+        </header>
+
+        <main>
+            <section class="scanner-section glass-card">
+                <h2>QR Reader</h2>
+                <div id="reader-container" class="reader-container">
+                    <div id="reader"></div>
+                </div>
+                <div class="scanner-controls">
+                    <button id="start-scan-btn" class="btn primary-btn">カメラを起動</button>
+                    <button id="stop-scan-btn" class="btn secondary-btn" style="display: none;">スキャンを停止</button>
+                    <button id="simulate-scan-btn" class="btn secondary-btn">テスト打刻（カメラなし用）</button>
+                </div>
+                <div id="scan-status" class="status-message">カメラを起動してQRを読み取ってください。</div>
+            </section>
+
+            <section class="timetable-section glass-card">
+                <div class="timetable-header">
+                    <div class="week-navigation">
+                        <button id="prev-week-btn" class="btn icon-btn">◀ 前の週</button>
+                        <h2 id="current-week-label">今週の出席状況</h2>
+                        <button id="next-week-btn" class="btn icon-btn">次の週 ▶</button>
+                        <button id="this-week-btn" class="btn text-small secondary-btn" style="display: none;">今週に戻る</button>
+                    </div>
+                    <div class="header-actions">
+                        <button id="edit-schedule-btn" class="btn primary-btn text-small">時間割を編集</button>
+                        <button id="clear-data-btn" class="btn danger-btn text-small">リセット</button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="timetable" id="timetable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>月</th>
+                                <th>火</th>
+                                <th>水</th>
+                                <th>木</th>
+                                <th>金</th>
+                                <th>土</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetable-body">
+                            <!-- JavaScriptで生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="stats-section glass-card">
+                <h2>出席状況レポート <span class="stats-subtitle">（全15回想定）</span></h2>
+                <div class="stats-grid" id="stats-container">
+                    <!-- JavaScriptで生成 -->
+                    <p class="status-message">時間割に科目を設定すると、ここに出席状況が表示されます。</p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 通知用トースト -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
