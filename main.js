@@ -3,9 +3,10 @@ const PERIODS = [
     { id: 1, start: "09:00", end: "10:30" },
     { id: 2, start: "10:40", end: "12:10" },
     { id: 3, start: "13:00", end: "14:30" },
-    { id: 4, start: "14:40", end: "16:10" }, // デフォルト値
-    { id: 5, start: "16:20", end: "17:50" }, // デフォルト値
-    { id: 6, start: "18:00", end: "19:30" }  // デフォルト値
+    { id: 4, start: "14:40", end: "16:10" },
+    { id: 5, start: "16:20", end: "17:50" },
+    { id: 6, start: "18:00", end: "19:30" },
+    { id: 7, start: "19:40", end: "21:10" }
 ];
 
 // 0: 日, 1: 月, 2: 火, 3: 水, 4: 木, 5: 金, 6: 土
@@ -237,13 +238,6 @@ function setupEventListeners() {
 
     document.getElementById('start-scan-btn').addEventListener('click', startScanner);
     document.getElementById('stop-scan-btn').addEventListener('click', stopScanner);
-    
-    // テスト打刻ボタン（カメラなし用）
-    document.getElementById('simulate-scan-btn').addEventListener('click', () => {
-        showToast('テスト打刻を実行します...');
-        // デフォルトでは「現在時刻」でテスト
-        onScanSuccess('dummy_qr_data', null);
-    });
     
     // 時間割編集ボタン
     const editBtn = document.getElementById('edit-schedule-btn');

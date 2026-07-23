@@ -232,7 +232,7 @@ h2 {
     width: 100%;
     border-collapse: separate;
     border-spacing: 4px;
-    min-width: 500px;
+    min-width: 680px; /* 5文字程度が改行されずに収まるように幅を確保 */
     table-layout: fixed;
 }
 
